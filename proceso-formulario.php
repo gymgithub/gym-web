@@ -47,7 +47,18 @@ echo "%Proteínas: $porcen_prot \n";
 echo "%Carbohidratos: $porcen_carbo \n";
 echo "%Grasas: $porcen_grasa \n";
 
+
+
+echo <<<FORMULARIO
+
+<form action="proceso-pablo.php" enctype="multipart/form-data" method="post"><br>
+            Nuevo porcentaje de proteína <input type="number" id="prot_new" name="prot_new"><br>
+            Nuevo porcentaje de carbohidratos <input type="number" id="carbo_new" name="carbo_new"><br>
+            Nuevo porcentaje de grasas <input type="number" id="grasa_new" name="grasa_new"><br>
+            <input type="submit" name="enviar" id="enviar">
+</form>
+
+FORMULARIO;
+
 echo "</pre>";
-
-
 ?>
