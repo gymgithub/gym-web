@@ -24,7 +24,7 @@ if($imc>=25){
     $carbo_nece=$peso*CARBO_STD_MENOR25*CARBO_CAL;
     $grasa_nece=(($altura*100)-100)*GRASA_CAL;    
 }
-//VALORES EN CALORÍAS (test)
+//VALORES EN CALORÍAS
 
 $cal_total=$prot_nece+$carbo_nece+$grasa_nece;
 
