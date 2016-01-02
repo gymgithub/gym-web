@@ -8,14 +8,32 @@
     <form action="proceso-formulario.php" enctype="multipart/form-data" method="post">
         <fieldset>
             <legend>Datos de acceso</legend>
-            <label for="user">Usuario</label><input type="text" id="user" name="user">
+            <label for="email">Email</label><input type="email" id="email" name="email">
             <label for="pass">Pass</label><input type="password" id="pass" name="pass">   
+        </fieldset>
+        <fieldset>
+            <legend>Datos personales</legend>
+            <label for="nombre">Nombre</label><input type="text" id="nombre" name="nombre">
+            <label for="apellidos">Apellidos</label><input type="text" id="apellidos" name="apellidos">
+            <label for="edad">Edad</label><input type="number" id="edad" name="edad">
+            <label for="hombre">Hombre</label><input type="radio" name="sexo" value="0" id="sexo_H">
+            <label for="mujer">Mujer</label><input type="radio" name="sexo" value="1" id="sexo_M">
+        </fieldset>
+        <fieldset>
+            <legend>Datos de entrenamiento</legend>
+            <label for="fines">Fines</label><input type="text" name="fines" id="fines">
+            <label for="objetivos">Objetivos</label><input type="text" name="objetivos" id="objetivos">
+            <label for="lugar_entrenamiento">Lugar de entrenamiento</label><input type="text" name="lugar_entrenamiento" id="lugar_entrenamiento">
         </fieldset>
         <fieldset>
             <legend>Datos corporales</legend>
             <label for="peso">Peso (Kilogramos)</label><input type="text" id="peso" name="peso">
             <label for="altura">Altura (metros)</label><input type="text" id="altura" name="altura">
+            <label for="medida_cintura">Medida de la cintura</label><input type="number" id="medida_cintura" name="medida_cintura">
+            <label for="medida_pecho">Medida del pecho</label><input type="number" id="medida_pecho" name="medida_pecho">
+            <label for="medida_brazo">Medida del brazo</label><input type="number" id="medida_brazo" name="medida_brazo">
             <label for="foto">Foto</label><input type="file" id="foto" name="foto">
+            <label for="ideal">Foto del cuerpo ideal</label><input type="file" id="ideal" name="ideal">
         </fieldset>
         <input type="submit" name="enviar" id="enviar">   
     </form>
