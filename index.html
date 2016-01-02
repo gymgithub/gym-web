@@ -7,11 +7,17 @@
 <body>
     <form action="proceso-formulario.php" enctype="multipart/form-data" method="post">
         <fieldset>
+            <legend>Datos de acceso</legend>
+            <label for="user">Usuario</label><input type="text" id="user" name="user">
+            <label for="pass">Pass</label><input type="password" id="pass" name="pass">   
+        </fieldset>
+        <fieldset>
             <legend>Datos corporales</legend>
             <label for="peso">Peso (Kilogramos)</label><input type="text" id="peso" name="peso">
             <label for="altura">Altura (metros)</label><input type="text" id="altura" name="altura">
-            <input type="submit" name="enviar" id="enviar">
-        </fieldset>   
+            <label for="foto">Foto</label><input type="file" id="foto" name="foto">
+        </fieldset>
+        <input type="submit" name="enviar" id="enviar">   
     </form>
 </body>
 </html>
