@@ -1,14 +1,14 @@
 <?php
 //CONEXIÓN A LA BD
 include 'includes/iniciar_BD.inc.php';
-$email = $_POST["email"];
-$pass = $_POST["pass"];
-$nombre = $_POST["nombre"];
+$email     = $_POST["email"];
+$pass      = $_POST["pass"];
+$nombre    = $_POST["nombre"];
 $apellidos = $_POST["apellidos"];
-$edad = $_POST["edad"];
-$sexo = $_POST["sexo"];
-$peso=$_POST["peso"];
-$altura=$_POST["altura"];
+$edad      = $_POST["edad"];
+$sexo      = $_POST["sexo"];
+$peso      = $_POST["peso"];
+$altura    = $_POST["altura"];
 
 $link = "INSERT INTO Users ( ID, EMAIL, PASS, NOMBRE, APELLIDOS, EDAD, CLAVE_SEXO, PESO, ALTURA ) VALUES (NULL, '$email', '$pass', '$nombre', '$apellidos', '$edad', '$sexo', '$peso', '$altura')";
 
@@ -28,27 +28,27 @@ define("GRASA_CAL", 9);
 $imc=$peso/($altura*$altura);
 
 if($imc>=25){
-    $prot_nece_gram=$peso*PROT_STD_MAYOR25;
-    $carbo_nece_gram=$peso*CARBO_STD_MAYOR25*CARBO_CAL;
-    $grasa_nece_gram=(($altura*100)-100)*GRASA_CAL;
-    $prot_nece_cal=$prot_nece_gram*PROT_CAL;
-    $carbo_nece_cal=$carbo_nece_gram*CARBO_CAL;    
-    $grasa_nece_cal=$grasa_nece_gram*GRASA_CAL;    
+    $prot_nece_gram  = $peso*PROT_STD_MAYOR25;
+    $carbo_nece_gram = $peso*CARBO_STD_MAYOR25*CARBO_CAL;
+    $grasa_nece_gram = (($altura*100)-100)*GRASA_CAL;
+    $prot_nece_cal   = $prot_nece_gram*PROT_CAL;
+    $carbo_nece_cal  = $carbo_nece_gram*CARBO_CAL;    
+    $grasa_nece_cal  = $grasa_nece_gram*GRASA_CAL;    
 }elseif($imc<25){
-    $prot_nece_gram=$peso*PROT_STD_MENOR25;
-    $carbo_nece_gram=$peso*CARBO_STD_MENOR25;
-    $grasa_nece_gram=(($altura*100)-100);
-    $prot_nece_cal=$prot_nece_gram*PROT_CAL;
-    $carbo_nece_cal=$carbo_nece_gram*CARBO_CAL;    
-    $grasa_nece_cal=$grasa_nece_gram*GRASA_CAL;  
+    $prot_nece_gram  = $peso*PROT_STD_MENOR25;
+    $carbo_nece_gram = $peso*CARBO_STD_MENOR25;
+    $grasa_nece_gram = (($altura*100)-100);
+    $prot_nece_cal   = $prot_nece_gram*PROT_CAL;
+    $carbo_nece_cal  = $carbo_nece_gram*CARBO_CAL;    
+    $grasa_nece_cal  = $grasa_nece_gram*GRASA_CAL;  
 }
 //VALORES EN CALORÍAS
 
 $cal_total=$prot_nece_cal+$carbo_nece_cal+$grasa_nece_cal;
 
-$porcen_prot=($prot_nece_cal*100)/$cal_total;
-$porcen_carbo=($carbo_nece_cal*100)/$cal_total;
-$porcen_grasa=($grasa_nece_cal*100)/$cal_total;
+$porcen_prot  = ($prot_nece_cal*100)/$cal_total;
+$porcen_carbo = ($carbo_nece_cal*100)/$cal_total;
+$porcen_grasa = ($grasa_nece_cal*100)/$cal_total;
 //VALORES PORCENTUALES
 
 echo "<pre>";
