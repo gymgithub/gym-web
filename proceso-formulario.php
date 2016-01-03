@@ -1,10 +1,16 @@
 <?php
 //CONEXIÓN A LA BD
 include 'includes/iniciar_BD.inc.php';
-$user = $_POST["user"];
+$email = $_POST["email"];
 $pass = $_POST["pass"];
+$nombre = $_POST["nombre"];
+$apellidos = $_POST["apellidos"];
+$edad = $_POST["edad"];
+$sexo = $_POST["sexo"];
+$peso=$_POST["peso"];
+$altura=$_POST["altura"];
 
-$link = "INSERT INTO Users ( ID, EMAIL, PASS ) VALUES (NULL, '$user', '$pass')";
+$link = "INSERT INTO Users ( ID, EMAIL, PASS, NOMBRE, APELLIDOS, EDAD, CLAVE_SEXO, PESO, ALTURA ) VALUES (NULL, '$email', '$pass', '$nombre', '$apellidos', '$edad', '$sexo', '$peso', '$altura')";
 
 mysqli_query($enlace, $link);
 
@@ -18,9 +24,7 @@ define("PROT_CAL", 4);
 define("CARBO_CAL", 4);
 define("GRASA_CAL", 9);
 //EN CALORÍAS POR GRAMO
-$peso=$_POST["peso"];
-$altura=$_POST["altura"];
-    
+
 $imc=$peso/($altura*$altura);
 
 if($imc>=25){
@@ -69,9 +73,16 @@ echo "%Grasas: $porcen_grasa \n";
 echo <<<FORMULARIO
 
 <form action="proceso-pablo.php" enctype="multipart/form-data" method="post"><br>
-            Nuevo porcentaje de proteína <input type="number" id="prot_new" name="prot_new"><br>
-            Nuevo porcentaje de carbohidratos <input type="number" id="carbo_new" name="carbo_new"><br>
-            Nuevo porcentaje de grasas <input type="number" id="grasa_new" name="grasa_new"><br>
+            Gramos de proteinas de mantenimiento <input type="number" id="prot_gram_mant" name="prot_gram_mant" value="$prot_nece_gram"><br>
+            Gramos de carbohidratos de mantenimiento <input type="number" id="carbo_gram_mant" name="carbo_gram_mant" value="$carbo_nece_gram"><br>
+            Gramos de grasas de mantenimiento <input type="number" id="gras_gram_mant" name="gras_gram_mant" value="$grasa_nece_gram"><br>
+            Porcentaje de proteinas de mantenimiento <input type="number" id="prot_por_mant" name="prot_por_mant" value="$porcen_prot"><br>
+            Porcentaje de carbohidratos de mantenimiento <input type="number" id="carbo_por_mant" name="carbo_por_mant" value="$porcen_carbo"><br>
+            Porcentaje de grasas de mantenimiento <input type="number" id="gras_por_mant" name="gras_por_mant" value="$porcen_grasa"><br>
+            Nuevo porcentaje de proteína <input type="number" id="prot_por_new" name="prot_por_new"><br>
+            Nuevo porcentaje de carbohidratos <input type="number" id="carbo_por_new" name="carbo_por_new"><br>
+            Nuevo porcentaje de grasas <input type="number" id="grasa_por_new" name="grasa_por_new"><br>
+            <input type="hidden" name="email" id="email" value="$email"> 
             <input type="submit" name="enviar" id="enviar">
 </form>
 
