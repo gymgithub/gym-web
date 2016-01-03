@@ -12,7 +12,7 @@ $altura    = $_POST["altura"];
 
 $link = "INSERT INTO Users ( ID, EMAIL, PASS, NOMBRE, APELLIDOS, EDAD, CLAVE_SEXO, PESO, ALTURA ) VALUES (NULL, '$email', '$pass', '$nombre', '$apellidos', '$edad', '$sexo', '$peso', '$altura')";
 
-mysqli_query($enlace, $link);
+mysqli_query ($enlace, $link) or die(mysqli_error($enlace));
 
 //DECLARACIÓN DE CONSTANTES
 define("PROT_STD_MAYOR25", 3);
