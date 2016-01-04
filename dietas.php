@@ -30,11 +30,18 @@ include 'includes/iniciar_BD.inc.php';
 
 // LECTURA BASE DE DATOS DE ALIMENTOS
 
-/*$consulta   = "SELECT NOMBRE FROM Alimentos";
-$alim_name  = mysqli_query($enlace, $consulta) or die(mysqli_error($enlace));
-$alim_prot  = mysqli_query($enlace, "SELECT GR_PROT_100GRPROD FROM Alimentos") or die(mysqli_error($enlace));
-$alim_carbo = mysqli_query($enlace, "SELECT GR_CARBO_100GRPROD FROM Alimentos") or die(mysqli_error($enlace));
-$alim_gras  = mysqli_query($enlace, "SELECT GR_GRAS_100GRPROD FROM Alimentos") or die(mysqli_error($enlace));*/    
+$consulta   = "SELECT * FROM Alimentos";
+$result = mysqli_query($enlace, $consulta);
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        $ali[] = $row;
+    }
+}
+    echo "<pre>";
+        print_r($ali);
+    echo "</pre>";
 ?>
 
 <style type="text/css">
@@ -59,13 +66,12 @@ $alim_gras  = mysqli_query($enlace, "SELECT GR_GRAS_100GRPROD FROM Alimentos") o
         <input list="alimentos" name="alimentos">
         <datalist id="alimentos">
             <?php 
-                $consulta   = "SELECT NOMBRE FROM Alimentos";
-                $alim_name  = mysqli_query($enlace, $consulta) or die(mysqli_error($enlace));
-                        while ($fila = mysqli_fetch_array($alim_name)) {
-                            echo "<option value=\"$fila[0]\">$fila[0]</option>";
+                    foreach ($ali as $value) {
+                        foreach ($value as $vvalue){
+                            echo "<option value=".$value[0].">".$value[2]."</option>";
                         }
-                mysqli_free_result($alim_name);
-                mysqli_close($enlace);  
+                    }
+
             ?>  
         </datalist>
     </td>
