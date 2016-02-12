@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import csv
 from compute import compute
 from optimizer import optimizer
@@ -36,7 +38,7 @@ class Dieta_dist:
         self.G_appetizers = 40
         self.G_dinner     = 15
 
-# Dieta food daya base
+# Dieta food data base
 class Dieta_foodDB(object):
     def __init__ (self):
         # Import food database
@@ -122,6 +124,7 @@ class Dieta_goals(object):
 
 class Dieta_days(object):
     def __init__(self,goals,foodDB):
+        self.list_meals = []
         const_list_break      = [goals.P_break,goals.C_break,goals.G_break]
         const_list_lunch      = [goals.P_lunch,goals.C_lunch,goals.G_lunch]
         const_list_appetizers = [goals.P_appetizers,goals.C_appetizers,goals.G_appetizers]
@@ -131,6 +134,12 @@ class Dieta_days(object):
         self.lunch      = Dieta_meals(goals,foodDB,const_list_lunch,"lunch")
         self.appetizers = Dieta_meals(goals,foodDB,const_list_appetizers,"appetizers")
         self.dinner     = Dieta_meals(goals,foodDB,const_list_dinner,"dinner")
+
+        self.list_meals.append(self.breakfast)
+        self.list_meals.append(self.lunch)
+        self.list_meals.append(self.appetizers)
+        self.list_meals.append(self.dinner)
+
 
 class Dieta_meals(object):
     def __init__(self,goals,foodDB,const_list, name):
@@ -169,7 +178,7 @@ class Dieta_meals(object):
          
         elif inst["button"] == "find":
             finder_settings = {self.name: inst["combo"][0]}
-            found = finder(finder_settings,self.goals,self.foodDB)
+            found = finder(finder_settings, self.goals,self.foodDB)
             nutrients  = compute(found[0],found[1],self.foodDB.food_total_list)
             
             self.food_list  = found[0][0]
@@ -182,7 +191,7 @@ class Dieta_meals(object):
 # Dieta object
 class Dieta(object):    
     def __init__(self,Kcal,P,C,G):    
-        
+        self.list_days = []
         const  = Dieta_const()    
         dist   = Dieta_dist()
         foodDB = Dieta_foodDB()                     
@@ -200,8 +209,12 @@ class Dieta(object):
         self.friday    = Dieta_days(goals,foodDB)
         self.saturday  = Dieta_days(goals,foodDB)
         
-        
-        
+        self.list_days.append(self.monday)
+        self.list_days.append(self.tuesday)
+        self.list_days.append(self.wednesday)
+        self.list_days.append(self.thursday)
+        self.list_days.append(self.friday)
+        self.list_days.append(self.saturday)
         
         
         

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 def compute(food_list,quant_list,food_total_list): 
     

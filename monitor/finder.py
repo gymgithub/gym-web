@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import csv
 import numpy as np
 from scipy.optimize import minimize
@@ -13,7 +15,7 @@ def finder (settings,goals,foodDB):
     Carbo_rich_heavy = foodDB.Carbo_rich_heavy
     Grasa_rich_soft  = foodDB.Grasa_rich_soft
     Grasa_rich_heavy = foodDB.Grasa_rich_heavy
-          
+
     # Randon choices (for now, it can be repeated food)
     food_list  = []
     const_list = []
@@ -88,7 +90,10 @@ def finder (settings,goals,foodDB):
             elif letter == "C":
                 temp_list = random.choice(Carbo_rich_heavy)
             else:
-                temp_list = random.choice(Grasa_rich_heavy)
+                try:
+                    temp_list = random.choice(Grasa_rich_heavy)
+                except IndexError:
+                    print "petaaaaa", "--> ", Grasa_rich_heavy
             dinner_list.append(temp_list[0])
         food_list.append(dinner_list)
         dinner_const = []
