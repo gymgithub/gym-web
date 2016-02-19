@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'diets_generator',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -76,8 +77,10 @@ WSGI_APPLICATION = 'welofit.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'welofit_db',
+        'USER': 'root',
+        'PASSWORD': 'Compresion_88',
     }
 }
 

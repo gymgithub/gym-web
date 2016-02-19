@@ -1,0 +1,63 @@
+1;Huevo cocido;12.5;0.7;9.5;138.3;1;P
+2;Clara de huevo;12.4;0.6;0;52;1;P
+3;Huevo entero;12.7;0.7;12.1;162.5;1;P
+4;Leche entera;3;4.5;3.6;62.4;1;C
+5;Leche desnatada;3.1;4.7;0.3;33.9;1;C
+6;Yogur griego desnatado;6.5;6.8;0.2;55;1;C
+7;Queso fresco 0%;11.9;4;0.7;69.9;1;P
+8;Requesón 0%;12.2;5.2;0.4;73.2;1;P
+9;Ricotta;11;5;8;136;1;P
+10;Filete de ternera;24;0;8;168;2;P
+11;Muslo de pollo;20;0;11.2;180.8;2;P
+12;Pechuga de pollo;22.2;0;6.2;144.6;2;P
+13;Muslo de pavo;20.5;0;3.6;114.4;2;P
+14;Pechuga de pavo;16;0.4;0.4;69.2;2;P
+15;Bacalao fresco;17;0;1;77;2;P
+16;Lenguado;18.8;0;1.8;91.4;2;P
+17;Merluza;17.8;0;1.1;81.1;2;P
+18;Pez Espada;17.5;0;3;97;2;P
+19;Emperador;23.5;0;7.9;165.1;2;P
+20;Salmón ahumado;23;0;9;173;2;P
+21;Caballa fresca;19;0;14;202;2;P
+22;Atún al natural;24;0;0.8;103.2;1;P
+23;Atún en escabeche;25.4;0;4.2;139.4;1;P
+24;Atún en aceite de oliva;24;0;12;204;1;P
+25;Pulpo;18;1.4;1.4;90.2;2;P
+26;Sepia;9.6;0;2;56.4;2;P
+27;Gambas;20.9;0;1.1;93.5;2;P
+28;Arroz blanco;6.6;81;0.9;358.5;2;C
+29;Arroz integral;6.4;74.8;2.5;347.3;2;C
+30;Pasta blanca;11;72;1.5;345.5;2;C
+31;Pasta integral;12;66;2;330;2;C
+32;Patata cocida;2.1;20;0.2;90.2;2;C
+33;Batata cocida;2;20.7;0.1;91.7;1;C
+34;Pan blanco;8.5;51.5;1.6;254.4;1;C
+35;Pan de centeno;8.5;42.2;1.1;212.7;1;C
+36;Pan integral;7;41.4;0.9;201.7;1;C
+37;Pan multicereal;8;48;2.9;250.1;1;C
+38;Cereales integrales;9.4;82;1.5;379.1;1;C
+39;Garbanzos;21;44;6.3;316.7;2;C
+40;Guisantes;5;14;0.4;79.6;2;C
+41;Judías Blancas;7;16;0;92;2;C
+42;Alubias negras;21.4;40;1;254.6;2;C
+43;Judías verdes;1.9;4.2;0.2;26.2;2;C
+44;Lentejas;25;54;1.8;332.2;2;C
+45;Tortitas de arroz;8;83;1.5;377.5;1;C
+46;Tortitas de maÌz;9;85.6;2.6;401.8;1;C
+47;Aceite de oliva;0;0;100;900;1;G
+48;Nueces;15;11;64;680;1;G
+49;Avellanas;12;10.5;61.6;644.4;1;G
+50;Cacahuetes tostados;23.6;18.7;46.9;591.3;1;G
+51;Pistachos;17.6;11.6;51.6;581.2;1;G
+52;Almendras ;26;14.3;53.3;640.9;1;G
+53;Crema de cacahuete;24.3;12.6;47.4;574.2;1;G
+54;Cereales granola;10;76.7;8.3;421.5;1;C
+55;Leche descremada;3;5;0.5;36.5;1;C
+56;Tomate rojo;0.88;3.5;0.21;19.41;2;C
+57;Atun en agua;25;0;0.96;108.64;1;P
+58;Trucha;18.75;0;6.7;135.3;2;P
+59;Tilapia;26;0;2.7;128.3;2;P
+60;Tortitas arroz integral;9;81.8;0;363.2;1;C
+61;Proteinas Soya;45.5;39.4;7.6;408;1;P
+62;Esp·rragos conserva;1.88;1.5;0.31;16.31;2;P
+63;Queso fresco light;26.7;3.3;10;210;1;P
