@@ -3,16 +3,19 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from diets_generator.models import Foods
 from scripts import main
+import json
 
 
 def dashboard_generator(request):
     list_foods = Foods.objects.all()
-    print dir(main)
     output = []
-    for i in list_foods:
-        output.append(i.food_name)
 
-    output_str = ", ".join(output)
+    list_args = ['compute', 'monday', 'breakfast']
+    food_list = [["Pistachos", "Clara de huevo", "Cereales granola"]]
+    quant_list = [["32", "75", "250"]]
+    combo = ['PGC']
+    output_str = json.dumps(main.main(list_args, food_list, quant_list,
+                                      combo, 2800, 30, 10, 20))
 
     return HttpResponse(output_str)
 

@@ -8,8 +8,8 @@ class Foods(models.Model):
     gr_carbs = models.FloatField()
     gr_fats = models.FloatField()
     calories = models.FloatField()
-    nutrient_highlight = models.CharField(max_length=1  )
     food_weight = models.IntegerField()
+    nutrient_highlight = models.CharField(max_length=1)
 
     class Meta:
         verbose_name = 'Foods'

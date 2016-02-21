@@ -4,9 +4,11 @@ import csv
 from compute import compute
 from optimizer import optimizer
 from finder import finder
+from diets_generator.models import Foods
+import os
 
 class User:
-    def __init__(self,name,weight,height):
+    def __init__(self, name, weight, height):
         self.name   = name
         self.weight = weight
         self.height = height
@@ -38,25 +40,34 @@ class Dieta_dist:
         self.G_appetizers = 40
         self.G_dinner     = 15
 
+
 # Dieta food data base
 class Dieta_foodDB(object):
-    def __init__ (self):
+    def __init__(self):
         # Import food database
-        with open('alimentosDB.csv', 'r') as f:
+        foods = Foods.objects.all()
+        food_name = []
+        for i in foods:
+            food_name.append(i.food_name)
+        print food_name
+        foods_db = os.path.abspath(os.path.join(__file__, '..', 'alimentosDB.csv'))
+
+        with open(foods_db, 'r') as f:
             reader = csv.reader(f)
             food_total_list = list(reader)
+            print food_total_list
             
         # Clasifying w.r.t main nutrient
         nfood = len(food_total_list)
         Prot_rich  = []
         Carbo_rich = []
         Grasa_rich = []
-        for i in range(0,nfood):
-            if food_total_list[i][6] == "P" :
+        for i in range(0, nfood):
+            if food_total_list[i][6] == "P":
                 Prot_rich.append(food_total_list[i][0:6])
-            elif food_total_list[i][6] == "C" :
+            elif food_total_list[i][6] == "C":
                 Carbo_rich.append(food_total_list[i][0:6])
-            else :
+            else:
                 Grasa_rich.append(food_total_list[i][0:6])    
         
         # Clasifying w.r.t type of meal
