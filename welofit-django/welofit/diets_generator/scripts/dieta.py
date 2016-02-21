@@ -46,30 +46,23 @@ class Dieta_foodDB(object):
     def __init__(self):
         # Import food database
         foods = Foods.objects.all()
-        food_name = []
-        for i in foods:
-            food_name.append(i.food_name)
-        print food_name
-        foods_db = os.path.abspath(os.path.join(__file__, '..', 'alimentosDB.csv'))
+        list_foods = Foods.objects.values_list('food_name', 'gr_proteins', 'gr_carbs', 'gr_fats', 'calories',
+                                               'food_weight', 'nutrient_highlight')
 
-        with open(foods_db, 'r') as f:
-            reader = csv.reader(f)
-            food_total_list = list(reader)
-            print food_total_list
-            
         # Clasifying w.r.t main nutrient
-        nfood = len(food_total_list)
+        nfood = len(foods)
         Prot_rich  = []
         Carbo_rich = []
         Grasa_rich = []
-        for i in range(0, nfood):
-            if food_total_list[i][6] == "P":
-                Prot_rich.append(food_total_list[i][0:6])
-            elif food_total_list[i][6] == "C":
-                Carbo_rich.append(food_total_list[i][0:6])
+
+        for i in range(nfood):
+            if foods[i].nutrient_highlight == "P":
+                Prot_rich.append(list(list_foods[i][0:6]))
+            elif foods[i].nutrient_highlight == "C":
+                Carbo_rich.append(list(list_foods[i][0:6]))
             else:
-                Grasa_rich.append(food_total_list[i][0:6])    
-        
+                Grasa_rich.append(list(list_foods[i][0:6]))
+
         # Clasifying w.r.t type of meal
         nPfood = len(Prot_rich)
         nCfood = len(Carbo_rich)
@@ -80,23 +73,23 @@ class Dieta_foodDB(object):
         Carbo_rich_heavy = []
         Grasa_rich_soft  = []
         Grasa_rich_heavy = []
-        for i in range(0,nPfood):
-            if Prot_rich[i][5] == "1" :
+        for i in range(0, nPfood):
+            if Prot_rich[i][5] == "1":
                 Prot_rich_soft.append(Prot_rich[i][0:4])
             else:
                 Prot_rich_heavy.append(Prot_rich[i][0:4])
-        for i in range(0,nCfood):
-            if Carbo_rich[i][5] == "1" :
+        for i in range(0, nCfood):
+            if Carbo_rich[i][5] == "1":
                 Carbo_rich_soft.append(Carbo_rich[i][0:4])
             else:
                 Carbo_rich_heavy.append(Carbo_rich[i][0:4])
-        for i in range(0,nGfood):
-            if Grasa_rich[i][5] == "1" :
+        for i in range(0, nGfood):
+            if Grasa_rich[i][5] == "1":
                 Grasa_rich_soft.append(Grasa_rich[i][0:4])
             else:
                 Grasa_rich_heavy.append(Grasa_rich[i][0:4]) 
          
-        self.food_total_list  =  food_total_list
+        self.food_total_list  =  list(list_foods)
         self.Prot_rich        =  Prot_rich
         self.Prot_rich_soft   =  Prot_rich_soft
         self.Prot_rich_heavy  =  Prot_rich_heavy
