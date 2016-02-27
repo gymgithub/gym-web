@@ -10,66 +10,19 @@
             <input type="submit" value="Buscar">
         </form>
         <h2>{{ mensaje }}</h2>
-        <h3>Maintenance macronutrients</h3>
+        <ul>
+            {% for i in list_nutrients %}
+                <h3></h3>{{ i }}
+            {% endfor %}
+        </ul>
+
         <form action="/diets/" method="post">{% csrf_token %}
-            <input type="text" name="calories" placeholder="Calories"><br>
-            <input type="text" name="proteins" placeholder="% Proteins"><br>
-            <input type="text" name="carbs" placeholder="% Carbs"><br>
-            <input type="text" name="fats" placeholder="% Fats">
-
-            <h3>Protein food </h3>
-            <input type="text" list="protein_foods" name="protein_food" placeholder="protein foods">
-            <datalist id="protein_foods">
-
-            {% for food in list_foods %}
-                {% if food.nutrient_highlight == 'P' %}
-                    <option>
-                        {{ food.food_name }}
-                    </option>
-                {% endif %}
-            {% endfor %}
-            </datalist>
-            <input type="number" name="gr_protein" placeholder="Gr proteins"></input>
-
-            <h3>Carbs food</h3>
-            <input type="text" list="carbs_foods" name="carbs_food" placeholder="carbs foods">
-            <datalist id="carbs_foods">
-            {% for food in list_foods %}
-                {% if food.nutrient_highlight == 'C' %}
-                    <option>
-                        {{ food.food_name }}
-                    </option>
-                {% endif %}
-            {% endfor %}
-            </datalist>
-            <input type="number" name="gr_carbs" placeholder="Gr carbs"></input>
-
-            <h3>Fats food </h3>
-            <input type="text" list="fats_foods" name="fats_food" placeholder="fats foods">
-            <datalist id="fats_foods">
-
-            {% for food in list_foods %}
-                {% if food.nutrient_highlight == 'G' %}
-                    <option>
-                        {{ food.food_name }}
-                    </option>
-                {% endif %}
-            {% endfor %}
-            </datalist>
-            <input type="number" name="gr_fats" placeholder="Gr fats"></input>
-
-
-            <h3>Combo</h3>
-            <input type="text" name="combo" placeholder="ex: PCG">
-
-            <input type="submit" value="OK">
+            {{ form.as_ul }}
+            <br><br>
+            <input type="submit" name="compute" value="compute"></input>
+            <input type="submit" name="optimize" value="optimize"></input>
+            <input type="submit" name="find" value="find"></input>
         </form>
-        <div>
-            <br><br><br>
-            
-            <button type="submit" name="compute">Compute</button>
-            <button type="button">Optimize</button>
-            <button type="button">Find</button>
-        </div>
+        <h3>{{ output_html }}</h3>
     </body>
 </html>

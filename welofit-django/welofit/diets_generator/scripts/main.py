@@ -33,10 +33,13 @@ def main(list_inputs, food_list, quant_list, combo, calories,
                     output['Fats'] = dieta_jm.list_days[day].list_meals[meal].G
                     output['Food list'] = dieta_jm.list_days[day].list_meals[meal].food_list
                     output['Quantity list'] = dieta_jm.list_days[day].list_meals[meal].quant_list
+
+    print output
+
     return output
 
 if __name__ == "__main__":
-    sys.exit(main(list_inputs))
+    sys.exit(main())
     
     
 

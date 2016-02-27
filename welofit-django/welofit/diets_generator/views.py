@@ -4,64 +4,84 @@ from django.http import HttpResponse
 from diets_generator.models import Foods
 from scripts import main
 import json
+from diets_generator.forms import ListFoods
 
 
 def dashboard_generator(request):
-    list_foods = Foods.objects.all()
-    ua = request.META['HTTP_USER_AGENT']
+    context = {}
+    list_foods = []
+    day_foods = []
+    list_quants = []
+    day_quant = []
+    list_args = []
+    list_nutrients = []
 
+    foods_objects = Foods.objects.all()
 
+    for i in foods_objects:
+        if i.nutrient_highlight == 'P':
+            protein_food = i.food_name
+        elif i.nutrient_highlight == 'C':
+            carb_food = i.food_name
+        elif i.nutrient_highlight == 'G':
+            fat_food = i.food_name
 
-    list_args = ['compute', 'monday', 'breakfast']
-
-
-    complete_food_list = []
-    complete_quant_list = []
-    quant_list = []
-    food_list = []
-    combo = []
-    calories = request.POST['calories']
-    proteins = request.POST['proteins']
-    carbs = request.POST['carbs']
-    fats = request.POST['fats']
-    for i, v in request.POST.items():
-        if i == "protein_food":
-            food_list.append(v)
-        elif i == "carbs_food":
-            food_list.append(v)
-        elif i == "fats_food":
-            food_list.append(v)
-        elif i == "gr_protein":
-            quant_list.append(v)
-        elif i == "gr_carbs":
-            quant_list.append(v)
-        elif i == "gr_fats":
-            quant_list.append(v)
-
-    complete_quant_list.append(quant_list)
-    complete_food_list.append(food_list)
-    print complete_food_list
-    print complete_quant_list
-    combo.append(request.POST['combo'])
-
-    #output_str = json.dumps(main.main(list_args, complete_food_list, complete_quant_list, combo, calories,
-    #                                  proteins, carbs, fats))
-
-    #print output_str
+    context['list_foods'] = list_foods
 
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
         foods = Foods.objects.filter(food_name__icontains=q)
         for i in foods:
             if request.GET['q'] == i.food_name:
-                mensaje = request.GET['q'] + " has " + str(i.gr_proteins) + " gr of proteins"
+                list_nutrients.append(str(i.gr_proteins) + " gr of proteins")
+                list_nutrients.append(str(i.gr_carbs) + " gr of carbs")
+                list_nutrients.append(str(i.gr_fats) + " gr of fats")
                 break
-            else:
-                mensaje = "papafrita"
     else:
         mensaje = 'Has subido un formulario vacio.'
+        context['mensaje'] = mensaje
 
-    context = {'list_foods': list_foods, 'UA': ua, 'mensaje': mensaje}
+    if request.method == 'POST':
+        for i, v in request.POST.items():
+            if i == 'compute':
+                list_args.append(v)
+            elif i == 'optimize':
+                list_args.append(v)
+            elif i == 'find':
+                list_args.append(v)
+
+        form = ListFoods(request.POST)
+
+        if form.is_valid():
+            mc = form.cleaned_data
+            print mc
+            list_args.append(mc['day'])
+            list_args.append(mc['meal'])
+            day_foods.append(mc['food_proteins'])
+            day_foods.append(mc['food_carbs'])
+            day_foods.append(mc['food_fats'])
+            day_quant.append(mc['gr_food1'])
+            day_quant.append(mc['gr_food2'])
+            day_quant.append(mc['gr_food3'])
+
+            print list_args
+            list_foods.append(day_foods)
+            list_quants.append(day_quant)
+            output_str = main.main(list_args, list_foods, list_quants, mc['combo'], mc['calories'], mc['proteins'],
+                                    mc['carbs'], mc['fats'])
+
+            output_html = json.dumps(output_str)
+            context['list_args'] = list_args
+            context['output_html'] = output_html
+        else:
+            print "no valido"
+
+    else:
+
+        form = ListFoods()
+    context['form'] = form
+
+    context['list_nutrients'] = list_nutrients
 
     return render(request, 'diets_generator/index.html', context)
 
