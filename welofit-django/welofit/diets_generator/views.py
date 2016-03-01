@@ -31,12 +31,15 @@ def dashboard_generator(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
         foods = Foods.objects.filter(food_name__icontains=q)
-        for i in foods:
-            if request.GET['q'] == i.food_name:
+        if foods:
+            for i in foods:
                 list_nutrients.append(str(i.gr_proteins) + " gr of proteins")
                 list_nutrients.append(str(i.gr_carbs) + " gr of carbs")
                 list_nutrients.append(str(i.gr_fats) + " gr of fats")
                 break
+        else:
+            mensaje = "This food doesnt' exists"
+            context['mensaje'] = mensaje
     else:
         mensaje = 'Has subido un formulario vacio.'
         context['mensaje'] = mensaje
@@ -64,7 +67,6 @@ def dashboard_generator(request):
             day_quant.append(mc['gr_food2'])
             day_quant.append(mc['gr_food3'])
 
-            print list_args
             list_foods.append(day_foods)
             list_quants.append(day_quant)
             output_str = main.main(list_args, list_foods, list_quants, mc['combo'], mc['calories'], mc['proteins'],
