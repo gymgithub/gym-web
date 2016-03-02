@@ -78,9 +78,10 @@ WSGI_APPLICATION = 'welofit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'welofit_db',
-        'USER': 'root',
-        'PASSWORD': 'Compresion_88',
+        'NAME': 'gymweb',
+        'USER': 'gymweb',
+        'PASSWORD': 'oYMP8O3H9k',
+        'HOST': 'db4free.net',
     }
 }
 
@@ -102,4 +103,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

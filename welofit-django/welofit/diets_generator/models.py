@@ -9,7 +9,12 @@ class Foods(models.Model):
     gr_fats = models.FloatField()
     calories = models.FloatField()
     food_weight = models.IntegerField()
-    nutrient_highlight = models.CharField(max_length=1)
+    NUTRIENT_CHOICES = (
+        ('P', 'P'),
+        ('C', 'C'),
+        ('G', 'G'),
+    )
+    nutrient_highlight = models.CharField(max_length=1, choices=NUTRIENT_CHOICES)
 
     class Meta:
         verbose_name = 'Foods'
@@ -24,4 +29,10 @@ class DietInputs(models.Model):
     proteins_percentage = models.FloatField()
     carbs_percentage = models.FloatField()
     fats_percentage = models.FloatField()
+
+
+
+
+
+
 
