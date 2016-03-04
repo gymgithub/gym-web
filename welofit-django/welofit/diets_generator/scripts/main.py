@@ -31,10 +31,8 @@ def main(list_inputs, food_list, quant_list, combo, calories,
                     output['Proteins'] = dieta_jm.list_days[day].list_meals[meal].P
                     output['Carbohydrates'] = dieta_jm.list_days[day].list_meals[meal].C
                     output['Fats'] = dieta_jm.list_days[day].list_meals[meal].G
-                    output['Food list'] = dieta_jm.list_days[day].list_meals[meal].food_list
-                    output['Quantity list'] = dieta_jm.list_days[day].list_meals[meal].quant_list
-
-    print output
+                    #output['Food list'] = dieta_jm.list_days[day].list_meals[meal].food_list
+                    #output['Quantity list'] = dieta_jm.list_days[day].list_meals[meal].quant_list
 
     return output
 
