@@ -1,177 +1,38 @@
+{% load crispy_forms_tags %}
+{% load staticfiles %}
 <html>
     <head>
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-       <style>
-           li{
-               list-style: none;       
-           }
-           legend, label{
-               text-align: center;
-           }
-           fieldset{
-               margin-top: 50px;
-           }
-           label{
-               width: 100%;
-           }
-           .buscar, .message{
-               margin-top: 50px;
-               margin-bottom: 50px;
-           }
-
-        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
         <script src="https://code.jquery.com/jquery-2.2.1.js"></script>
-        {% load staticfiles %}
         <script src="{% static 'js/djangoajax.js' %}"></script>
-        <script type="text/javascript" src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
-        <script>
-        $( document ).ready(function() { 
-            var frm = $('#search_input');
-            frm.submit(function () {
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    success: function (data) {
-                        $(".resultado").html(data);
-                    },
-                    error: function(data) {
-                        $(".resultado").html("Something went wrong!");
-                    }
-                });
-                return false;
-            });
-            
-            $('#search_input')
-            .val('')
-            .focus()
-            .keyup(function(){
-
-                if(!$.trim($(this).val()))
-                $('.results .error').empty().hide();
-            });
-
-            var cache = {};
-            $('#search_input').autocomplete({
-                minLength: 2,
-                select: function( event, ui ) {
-                    return false;
-                },
-                open: function() {
-                    $('.results .wrapper').html($(this).autocomplete("widget").html());
-                    $(this).autocomplete("widget").hide();
-                },
-                source: function( request, response ) {
-
-                    if (cache[request.term]) {
-                        response(cache[request.term]);
-                        return;
-                    }
-
-                    $.ajax({
-                        dataType : 'json',
-                        method : 'POST',
-                        url : '/diets/search/',
-                        data : {
-                            q : encodeURIComponent(request.term),
-                            csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
-                        },
-                        success : function(data) {
-                            var users = [];
-
-                            for(var x in data){
-                                users.push({
-                                    username : data[x].fields['username'],
-                                    CI : data[x].fields['CI'],
-                                    email : data[x].fields['email']
-                                });
-                            }
-
-                            cache[request.term] = users;
-                            response(users);
-                        }
-                    });
-                },
-                response: function(event, ui) {
-
-                    if (ui.content.length === 0) {
-                        $('.results .error').html('No se encontraron resultados').show();
-                        $('.results .wrapper').empty();
-                    }
-                    else
-                    $('.results .error').empty().hide();
-                }
-            }).autocomplete('instance')._renderItem = function(ul, item) {
-
-                var user_tmpl = $('<div />')
-                .addClass('user')
-                .append('<a href="/" />').find('a').addClass('username').html(item.username)
-                .parent()
-                .append('<span class="identity"><strong>Identidad:</strong><span></span></span>')
-                .find('.identity > span').append(item.CI)
-                .parent().parent()
-                .append('<span class="email"><strong>Email:</strong><span></span></span>')
-                .find('.email > span').append(item.email)
-                .parent().parent();
-
-                return $('<div></div>')
-                .data('item.autocomplete', item)
-                .append(user_tmpl)
-                .appendTo(ul);
-            };
-
-        });
-        </script>
-        <title>Diets generator</title>
+        <script src="{% static 'js/main.js' %}"></script>
+        <title>Diets Generator</title>
     </head>
     <body>
        <div class="container">
-        <h1>Created new diet</h1>
-        <form id="search_input"  action="/diets/sol/" method="get">
-           <fieldset>
-               <legend>Search</legend>
-            <input class="form-control" type="text" name="q">
-            <input class="btn btn-default col-sm-2 col-sm-offset-5 buscar" type="submit" value="Buscar">
-            </fieldset>
-            <p class="resultado"></p>
-        </form>
-        
-        <form action="/diets/" method="post">{% csrf_token %}
-        <fieldset>
-            <legend>Food</legend>
-            <div class="col-sm-4"><label for="id_food_proteins">Proteins foods</label><input class="form-control" id="id_food_proteins" name="food_proteins" type="text"></div>
-            <div class="col-sm-4"><label for="id_food_carbs">Carbs foods</label><input class="form-control" id="id_food_carbs" name="food_carbs" type="text"></div>
-            <div class="col-sm-4"><label for="id_food_fats">Fats foods</label><input class="form-control" id="id_food_fats" name="food_fats" type="text"></div>
-        </fieldset>
-        <fieldset>
-            <legend>Food settings</legend>
-        <div class="col-sm-3"><label for="id_combo">Combo</label><input class="form-control" id="id_combo" name="combo" type="text"></div>
-        <div class="col-sm-3"><label for="id_gr_food1">Gr food1</label><input class="form-control" id="id_gr_food1" name="gr_food1" type="text"></div>
-        <div class="col-sm-3"><label for="id_gr_food2">Gr food2</label><input class="form-control" id="id_gr_food2" name="gr_food2" type="text"></div>
-        <div class="col-sm-3"><label for="id_gr_food3">Gr food3</label><input class="form-control" id="id_gr_food3" name="gr_food3" type="text"></div>
-        </fieldset>
-        <fieldset>
-            <legend>Food time</legend>
-            <div class="col-sm-4 col-sm-offset-1"><label for="id_meal">Meal</label><input class="form-control" id="id_meal" name="meal" type="text"></div>
-            <div class="col-sm-4 col-sm-offset-2"><label for="id_day">Day</label><input class="form-control" id="id_day" name="day" type="text"></div>
-        </fieldset> 
-        <fieldset>
-            <legend>Food ID</legend>
-            <div class="col-sm-3"><label for="id_calories">Calories</label><input class="form-control" id="id_calories" name="calories" type="text"></div>
-            <div class="col-sm-3"><label for="id_proteins">Proteins</label><input class="form-control" id="id_proteins" name="proteins" type="text"></div>
-            <div class="col-sm-3"><label for="id_carbs">Carbs</label><input class="form-control" id="id_carbs" name="carbs" type="text"></div>
-            <div class="col-sm-3"><label for="id_fats">Fats</label><input class="form-control" id="id_fats" name="fats" type="text"></div>
-        </fieldset>
-        <fieldset>
-            <legend>Opciones</legend>
-            <input class="btn btn-default col-sm-2 col-sm-offset-2" type="submit" name="compute" value="compute">
-            <input class="btn btn-default col-sm-2 col-sm-offset-1" type="submit" name="optimize" value="optimize">
-            <input class="btn btn-default col-sm-2 col-sm-offset-1" type="submit" name="find" value="find">
-        </fieldset>       
-        </form>
-        <h3>{{ output_html }}</h3>
-        </div>
+            <h1>Created new diet</h1>
+            <form id="search_input"  action="/diets/sol/" method="get">
+               <fieldset>
+                   <legend>Search</legend>
+                    <input class="form-control dl_food" list="id_food_all" name="q">
+                    <div class="datalist-content dl">{{form}}</div>
+                    <!--<input class="btn btn-default col-sm-2 col-sm-offset-5 buscar" type="submit" value="Buscar">-->
+                </fieldset>
+                <p class="resultado"></p>
+            </form>
+            <form action="/diets/" method="post">{% csrf_token %}
 
-        
+                {% crispy form1 %}
+
+            <fieldset>
+                <legend>Opciones</legend>
+                <input class="btn btn-default col-sm-2 col-sm-offset-2" type="submit" name="compute" value="compute">
+                <input class="btn btn-default col-sm-2 col-sm-offset-1" type="submit" name="optimize" value="optimize">
+                <input class="btn btn-default col-sm-2 col-sm-offset-1" type="submit" name="find" value="find">
+            </fieldset>       
+            </form>
+            <h3>{{ output_html }}</h3>
+        </div>
     </body>
 </html>

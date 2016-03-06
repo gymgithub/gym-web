@@ -1,8 +1,16 @@
 <html>
+   <head>
+      <script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+       <script>
+           $( document ).ready(function() {
+               contenido = $("#id_food_all").html();
+               $(".datalist-content").html('<datalist id=\"id_food_all\">' + contenido + '</datalist>');
+           });
+       
+       </script>
+   </head>
     <body>
-            {% for i in foods %}
-               <div class="col-sm-4"><input class="form-control" type="text" value="{{ i }}"></div>
-                {{ mensaje }}
-            {% endfor %}
+    <input class="form-control" list="id_food_all">
+    <div class="datalist-content">{{form}}</div>
     </body>
 </html>

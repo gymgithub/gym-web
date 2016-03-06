@@ -1,25 +1,15 @@
 from django.shortcuts import render
-
-from diets_generator.models import Foods
-from scripts import main
-import json
-from diets_generator.forms import ListFoods
+from prueba_crispy.forms import SimpleForm, CartForm, CreditCardForm
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from django.http import HttpResponseBadRequest, HttpResponse, HttpRequest
+import json
 from django.contrib.auth.models import User
 from django.core import serializers
+import re
+from diets_generator.models import Foods
 
-
-
-def food_name(request):
-    context = {}
-    list_foods = []
-    foods_objects = Foods.objects.all()
-    context['list_foods'] = list_foods
-    foods = list_foods
-    return render(request, 'food_list.html', foods)
-
-
-def dashboard_generator(request):
+def prueba(request):
     context = {}
     list_foods = []
     day_foods = []
@@ -50,7 +40,7 @@ def dashboard_generator(request):
                 list_args.append(v)
 
         form = ListFoods(request.POST)
-        
+
         if form.is_valid():
             mc = form.cleaned_data
             print mc
@@ -76,38 +66,9 @@ def dashboard_generator(request):
             print "no valido"
 
     else:
-        form = ListFoods.SearchFoods()
-        form1 = ListFoods.Food()
+        form = SimpleForm()
 
     context['form'] = form
-    context['form1'] = form1
 
-    return render(request, 'diets_generator/index.html', context)
-
-def sol(request):
-    context = {}
-    list_foods = []
-    list_nutrients = []
-
-    foods_objects = Foods.objects.all()
-    context['list_foods'] = list_foods
-
-    if 'q' in request.GET and request.GET['q']:
-        q = request.GET['q']
-        foods = Foods.objects.filter(food_name__icontains=q)
-        if foods:
-            for i in foods:
-                list_nutrients.append(str(i.gr_proteins) + " gr of proteins")
-                list_nutrients.append(str(i.gr_carbs) + " gr of carbs")
-                list_nutrients.append(str(i.gr_fats) + " gr of fats")
-                break
-        else:
-            mensaje = "This food doesnt' exists"
-            context['mensaje'] = mensaje
-    else:
-        mensaje = 'Has subido un formulario vacio.'
-        context['mensaje'] = mensaje
-
-    context['list_nutrients'] = list_nutrients
-
-    return render(request, 'diets_generator/sol.html', context)
+    
+    return render(request, 'prueba_crispy/index.html', context)

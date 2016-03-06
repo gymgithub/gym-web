@@ -4,5 +4,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^diets/', include('diets_generator.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^diets/search/', view='diets_generator.views.search'),
+    url(r'^crispy/', include('prueba_crispy.urls')),
 ]
