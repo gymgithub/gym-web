@@ -3,11 +3,12 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+        <link rel="stylesheet" href="{% static 'css/steps.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="{% static 'js/djangoajax.js' %}"></script>
         <script src="{% static 'js/jquery.steps.js' %}"></script>
         <script src="{% static 'js/jquery.validate.js' %}"></script>
-        <script src="{% static 'js/jquery.cookie.js' %}"></script>               
+        <script src="{% static 'js/jquery.cookie.js' %}"></script>       
         <script src="{% static 'js/main.js' %}"></script>
         <script>
         $( document ).ready(function() { 
@@ -35,41 +36,9 @@
         }); 
         </script>
         <style>
-            .wizard>.steps .current a, .wizard>.steps .current a:hover, .wizard>.steps .current a:active {
-                background: #2184be;
-                color: #fff;
-                cursor: default;
-            }
-            .wizard>.steps a, .wizard>.steps a:hover, .wizard>.steps a:active {
+            .wizard>.content>.body .radio, .wizard>.content>.body .checkbox {
                 display: block;
-                width: auto;
-                margin: 0 .5em .5em;
-                padding: 1em 1em;
-                text-decoration: none;
-                -webkit-border-radius: 5px;
-                -moz-border-radius: 5px;
-                border-radius: 5px;
-            }
-            .wizard a, .tabcontrol a {
-                outline: 0;
-            }
-            a:hover, a:active {
-                color: #193954;
-                text-decoration: none;
-            }
-            a:hover, a:focus {
-                color: #005580;
-                text-decoration: underline;
-            }
-            a:hover, a:active {
-                outline: 0;
-            }
-            a {
-                color: #2184be;
-            }
-            a {
-                color: #08c;
-                text-decoration: none;
+                margin-left: 20px;
             }
         </style>
         <title>Welofit</title>
