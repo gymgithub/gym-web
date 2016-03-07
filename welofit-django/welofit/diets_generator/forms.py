@@ -3,7 +3,7 @@ from django import forms
 from diets_generator.models import Foods
 import json
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Div, Fieldset
+from crispy_forms.layout import Layout, Div, Fieldset, ButtonHolder, HTML, Submit
 
 class ListFoods:
     class SearchFoods(forms.Form):
@@ -48,9 +48,14 @@ class ListFoods:
         calories = forms.FloatField(widget=forms.TextInput(attrs={'class' : 'form-control'}))
         proteins = forms.FloatField(widget=forms.TextInput(attrs={'class' : 'form-control'}))
         carbs = forms.FloatField(widget=forms.TextInput(attrs={'class' : 'form-control'}))
-        fats = forms.FloatField(widget=forms.TextInput(attrs={'class' : 'form-control'})) 
+        fats = forms.FloatField(widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        
         
         helper = FormHelper()
+        helper.form_method = 'POST'
+        helper.add_input(Submit('compute', 'Compute', css_class='btn btn-default col-sm-2 col-sm-offset-2'))
+        helper.add_input(Submit('optimize', 'Optimize', css_class='btn btn-default col-sm-2 col-sm-offset-1'))
+        helper.add_input(Submit('find', 'Find', css_class='btn btn-default col-sm-2 col-sm-offset-1'))
         helper.layout = Layout(
             Fieldset(
                 'Foods',
@@ -115,7 +120,7 @@ class ListFoods:
                     'fats',
                     css_class="col-sm-3"
                 )
-            )
+            ),
         )
 
 

@@ -1,0 +1,95 @@
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+        <script src="{% static 'js/djangoajax.js' %}"></script>
+        <script src="{% static 'js/jquery.steps.js' %}"></script>
+        <script src="{% static 'js/jquery.validate.js' %}"></script>
+        <script src="{% static 'js/jquery.cookie.js' %}"></script>               
+        <script src="{% static 'js/main.js' %}"></script>
+        <script>
+        $( document ).ready(function() { 
+            var form = $("#example-form");
+            form.validate({
+                errorPlacement: function errorPlacement(error, element) { element.before(error); },
+            });
+            form.children(".container").steps({
+                headerTag: "h3",
+                bodyTag: "section",
+                transitionEffect: "slideLeft",
+                cssClass: "wizard",
+                onStepChanging: function (event, currentIndex, newIndex){
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                },
+                onFinishing: function (event, currentIndex){
+                    form.validate().settings.ignore = ":disabled";
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex){
+                    alert("Submitted!");
+                }
+            });
+        }); 
+        </script>
+        <style>
+            .wizard>.steps .current a, .wizard>.steps .current a:hover, .wizard>.steps .current a:active {
+                background: #2184be;
+                color: #fff;
+                cursor: default;
+            }
+            .wizard>.steps a, .wizard>.steps a:hover, .wizard>.steps a:active {
+                display: block;
+                width: auto;
+                margin: 0 .5em .5em;
+                padding: 1em 1em;
+                text-decoration: none;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+            }
+            .wizard a, .tabcontrol a {
+                outline: 0;
+            }
+            a:hover, a:active {
+                color: #193954;
+                text-decoration: none;
+            }
+            a:hover, a:focus {
+                color: #005580;
+                text-decoration: underline;
+            }
+            a:hover, a:active {
+                outline: 0;
+            }
+            a {
+                color: #2184be;
+            }
+            a {
+                color: #08c;
+                text-decoration: none;
+            }
+        </style>
+        <title>Welofit</title>
+    </head>
+
+<form id="example-form" action="#">
+    <div class="container">
+        <h3 class="sr-only">Account</h3>
+            <section>
+                {% crispy form_user %}
+            </section>
+        <h3 class="sr-only">Fitness</h3>
+            <section>
+                {% crispy form_fitness %}
+            </section>   
+        <h3 class="sr-only">Body</h3>
+            <section>
+                {% crispy form_body %}
+            </section>       
+    </div>
+</form>  
+
+</html>  

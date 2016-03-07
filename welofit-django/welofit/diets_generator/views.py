@@ -49,13 +49,12 @@ def dashboard_generator(request):
             elif i == 'find':
                 list_args.append(v)
 
-        form = ListFoods(request.POST)
+        form = ListFoods.Food(request.POST)
         
         if form.is_valid():
             mc = form.cleaned_data
             print mc
             list_args.append(mc['day'])
-            list_args.append(mc['prueba'])
             list_args.append(mc['meal'])
             day_foods.append(mc['food_proteins'])
             day_foods.append(mc['food_carbs'])
@@ -79,6 +78,7 @@ def dashboard_generator(request):
         form = ListFoods.SearchFoods()
         form1 = ListFoods.Food()
 
+    form1 = ListFoods.Food()    
     context['form'] = form
     context['form1'] = form1
 

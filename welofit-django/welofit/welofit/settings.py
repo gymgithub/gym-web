@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'diets_generator',
     'crispy_forms',
     'prueba_crispy',
+    'registro',
 )
 
 MIDDLEWARE_CLASSES = (

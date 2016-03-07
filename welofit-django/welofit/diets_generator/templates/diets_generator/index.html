@@ -24,13 +24,7 @@
             <form action="/diets/" method="post">{% csrf_token %}
 
                 {% crispy form1 %}
-
-            <fieldset>
-                <legend>Opciones</legend>
-                <input class="btn btn-default col-sm-2 col-sm-offset-2" type="submit" name="compute" value="compute">
-                <input class="btn btn-default col-sm-2 col-sm-offset-1" type="submit" name="optimize" value="optimize">
-                <input class="btn btn-default col-sm-2 col-sm-offset-1" type="submit" name="find" value="find">
-            </fieldset>       
+  
             </form>
             <h3>{{ output_html }}</h3>
         </div>
