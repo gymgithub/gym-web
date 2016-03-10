@@ -14,6 +14,7 @@ class user_data_form(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class' : 'form-control'}))
     birthdate = forms.DateField(widget=forms.DateInput(attrs={'class' : 'form-control'}))
     genre = forms.ChoiceField(widget=forms.RadioSelect, choices=GENDER_CHOICES)
+    profile_picture = forms.ImageField()
     helper = FormHelper()
     helper.form_tag = False
     helper.layout = Layout(
@@ -38,9 +39,16 @@ class user_data_form(forms.Form):
                 css_class="col-sm-4 col-sm-offset-2",
             ),
             css_class="row",
-        )
+        ),
+        Div(
+            Div(
+                'profile_picture',
+                css_class="col-sm-4 col-sm-offset-1",
+            ),
+            css_class="row",
+        )        
     )
-    
+
 class fitness_data_form(forms.Form):
     PLACE_CHOICES = (
         ('0', 'Gym'),

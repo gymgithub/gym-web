@@ -39,8 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'diets_generator',
     'crispy_forms',
-    'prueba_crispy',
     'registro',
+    'monitor',
 )
 
 MIDDLEWARE_CLASSES = (

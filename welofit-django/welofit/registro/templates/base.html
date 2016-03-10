@@ -3,36 +3,68 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{% static 'css/steps.css' %}">
+        <link rel="stylesheet" href="{% static 'registro/css/steps.css' %}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        <script src="{% static 'js/djangoajax.js' %}"></script>
-        <script src="{% static 'js/jquery.steps.js' %}"></script>
-        <script src="{% static 'js/jquery.validate.js' %}"></script>
-        <script src="{% static 'js/jquery.cookie.js' %}"></script>       
-        <script src="{% static 'js/main.js' %}"></script>
-        <script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="{% static 'registro/js/djangoajax.js' %}"></script>
+        <script src="{% static 'registro/js/jquery.steps.js' %}"></script>
+        <script src="{% static 'registro/js/jquery.validate.js' %}"></script>
+        <script src="{% static 'registro/js/jquery.cookie.js' %}"></script>
+        <script src="{% static 'registro/js/jquery.declarativeToggle.js' %}"></script>     
+        <script>       
         $( document ).ready(function() { 
-            var form = $("#example-form");
-            form.validate({
-                errorPlacement: function errorPlacement(error, element) { element.before(error); },
-            });
-            form.children(".container").steps({
-                headerTag: "h3",
-                bodyTag: "section",
-                transitionEffect: "slideLeft",
-                cssClass: "wizard",
-                onStepChanging: function (event, currentIndex, newIndex){
-                    form.validate().settings.ignore = ":disabled,:hidden";
-                    return form.valid();
-                },
-                onFinishing: function (event, currentIndex){
-                    form.validate().settings.ignore = ":disabled";
-                    return form.valid();
-                },
-                onFinished: function (event, currentIndex){
-                    alert("Submitted!");
-                }
-            });
+            if ($(window).width() >= 767) {
+                $('#modal-show-mobile').trigger('click');
+                $("#modal-show").click(function(){
+                    $("#myModal").modal("show");
+                });
+                var form = $("#wizard-form");
+                form.validate({
+                    errorPlacement: function errorPlacement(error, element) { element.before(error); },
+                });
+                form.children(".wizard_content").steps({
+                    headerTag: "h3",
+                    bodyTag: "section",
+                    transitionEffect: "slideLeft",
+                    cssClass: "wizard",
+                    onStepChanging: function (event, currentIndex, newIndex){
+                        form.validate().settings.ignore = ":disabled,:hidden";
+                        return form.valid();
+                    },
+                    onFinishing: function (event, currentIndex){
+                        form.validate().settings.ignore = ":disabled";
+                        return form.valid();
+                    },
+                    onFinished: function (event, currentIndex){
+                        alert("Submitted!");
+                    }
+                });                
+            }
+            if ($(window).width() < 767) {
+                var contenido = $(".modal-content").html();
+                $(".wrap").html("<div id=\'wizard-form-mobile\'>" + contenido + "</div>");
+                var form = $("#wizard-form");
+                form.validate({
+                    errorPlacement: function errorPlacement(error, element) { element.before(error); },
+                });
+                form.children(".wizard_content").steps({
+                    headerTag: "h3",
+                    bodyTag: "section",
+                    transitionEffect: "slideLeft",
+                    cssClass: "wizard",
+                    onStepChanging: function (event, currentIndex, newIndex){
+                        form.validate().settings.ignore = ":disabled,:hidden";
+                        return form.valid();
+                    },
+                    onFinishing: function (event, currentIndex){
+                        form.validate().settings.ignore = ":disabled";
+                        return form.valid();
+                    },
+                    onFinished: function (event, currentIndex){
+                        alert("Submitted!");
+                    }
+                });
+            };   
         }); 
         </script>
         <style>
@@ -40,25 +72,81 @@
                 display: block;
                 margin-left: 20px;
             }
+            .wizard>.content{
+                min-height: 50%;
+            }
+            .login-form>input{
+                margin: auto 0;
+            }
+            .modal-dialog{
+                 width: 90%;   
+            }
+            .toggle-btn-visible {
+                  position: static;
+                  visibility: visible;
+            }
+
+            .toggle-target-hidden { 
+                display: none; 
+            }
+            .toggle-target-expanded { 
+                display: block; 
+            }
+            .wrap{
+                margin-top: 175px;
+            }
         </style>
         <title>Welofit</title>
     </head>
-
-<form id="example-form" action="#">
-    <div class="container">
-        <h3 class="sr-only">Account</h3>
-            <section>
-                {% crispy form_user %}
-            </section>
-        <h3 class="sr-only">Fitness</h3>
-            <section>
-                {% crispy form_fitness %}
-            </section>   
-        <h3 class="sr-only">Body</h3>
-            <section>
-                {% crispy form_body %}
-            </section>       
-    </div>
-</form>  
-
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group row login-form">
+                <input type="text" placeholder="Email" class="form-control">
+                <input type="password" placeholder="Password" class="form-control">
+                <button type="submit" class="btn btn-success">Sign in</button>
+                <button type="button" class="hidden-xs hidden-sm btn btn-success" id="modal-show">Sign up</button>
+                <button type="button" class="hidden-md hidden-lg btn btn-success" id="modal-show-mobile" data-toggle-target=".wrap">Sign up</button>
+            </div>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+<div class="container"> 
+  <div class="wrap">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+            <div class="modal-content">
+                   <form id="wizard-form" action="/registro/" enctype="multipart/form-data">
+                   <div class="wizard_content">
+                    <h3 class="sr-only">Account</h3>
+                        <section>
+                            {% crispy form_user %}
+                        </section>
+                    <h3 class="sr-only">Fitness</h3>
+                        <section>
+                            {% crispy form_fitness %}
+                        </section>   
+                    <h3 class="sr-only">Body</h3>
+                        <section>
+                            {% crispy form_body %}
+                        </section> 
+                    </div>                   
+                </form>
+            </div>
+        </div>
+        </div> 
+    </div> 
+</div>          
 </html>  

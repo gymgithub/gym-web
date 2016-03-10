@@ -1,0 +1,85 @@
+{% extends 'monitor/base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div id="page-wrapper">
+               <a id="simple-menu" type="button" class="button-toggle" href="#sidr">
+                    <i class="fa fa-angle-double-left toggle-sidr"><span class="sr-only">Toggle navigation</span>
+                    </i>
+                </a>
+                <div class="container-fluid">
+                    <!-- Primera fila -->
+                    <div class="row row-eq-height">
+                       <!-- Foto y descripción -->
+                        <div class="col-md-4 col-xs-12">
+                            <div class="img-user-cont">
+                                <img src="{% static 'monitor/img/perfil.png' %}" class="img-responsive">
+                            </div>
+                            <h3 class="text-center">Nombre cliente</h3>
+                            <div class="info-list col-md-8 col-md-offset-4">
+                            <ul class="list-unstyled">
+                                <li><span class="font-bold">Altura:</span> 1.8 </li>
+                                <li><span class="font-bold">Peso:</span> 85 </li>
+                                <li><span class="font-bold">IMC:</span> 23 </li>
+                                <li><span class="font-bold">Objetivo:</span> Definir </li>
+                            </ul>
+                            </div>
+                        </div>
+                        <!-- Comentario del monitor --> 
+                        <div class="col-md-4 col-xs-12 margin-auto">
+                            <h3 class="text-center">Comentarios</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa nostrum sunt commodi dolorum nulla fuga soluta deserunt, maiores, quod aperiam asperiores nisi placeat tenetur ex autem, dignissimos exercitationem, consequuntur ullam!</p>
+                            <p>Quidem dicta hic distinctio nobis nesciunt ut? Sint unde eligendi fugit blanditiis inventore. Iusto fuga suscipit, vero, delectus illo necessitatibus impedit culpa, doloremque hic debitis quod id aliquam ut facere.</p>
+                        </div>
+                    </div>  
+                    <!-- Segunda fila -->
+                        <div id="tabs-container">
+                            <ul class="tabs">
+                                <li><a href="#graficos"> Gráficos </a></li>
+                                <li><a href="#historial"> Historial </a></li>
+                                <li><a href="#imagenes"> Imágenes </a></li>
+                            </ul>
+
+                            <div id="graficos">
+                                <div class="row row-eq-height">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="text-center panel-title">Progreso</h3>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body"> 
+                                           <!-- Gráfico de progreso -->   
+                                           <div id="progress"></div>
+                                        </div>     
+                                    </div>
+                                    <!-- Gráfico dieta -->
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="text-center panel-title">Dieta</h3>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body"> 
+                                            <div id="dieta-now"></div>
+                                        </div>    
+                                    </div>
+                                    <!-- Gráfico rutina -->
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="text-center panel-title">Rutina</h3>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div id="rutina-now"></div>
+                                        </div>   
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div id="historial"> ....... </div>
+                            <div id="imagenes"> ....... </div>
+                        </div>
+                </div>   
+                <!-- /#page-wrapper -->
+            </div>
+{% endblock content %}
