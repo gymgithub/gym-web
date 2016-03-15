@@ -2,11 +2,14 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-class user_data_model(models.Model):
+
+class UserData(models.Model):
     GENDER_CHOICES = (
         ('M', 'male'),
         ('F', 'female')
     )
+    name = models.CharField(max_length=200)
+    username = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
     password = models.CharField(max_length=300)
     birthdate = models.DateField
@@ -14,7 +17,14 @@ class user_data_model(models.Model):
     country = models.CharField
     city = models.CharField
 
-class fitness_data_model(models.Model):
+    class Meta:
+        verbose_name_plural = 'User data'
+
+    def __str__(self):
+        return self.name
+
+
+class FitnessData(models.Model):
     PLACE_CHOICES = (
         ('0', 'Gym'),
         ('1', 'Out'),
@@ -36,13 +46,20 @@ class fitness_data_model(models.Model):
         ('0', 'No'),
         ('1', 'Yes')
     )    
-    training_place = models.CharField(max_length = 1, choices=PLACE_CHOICES)
-    food_intolerance = models.CharField(max_length = 1000)
-    equipment = models.CharField(max_length = 1, choices=EQUIP_CHOICES)
-    chat_availability = models.CharField(max_length = 1, choices=CHAT_CHOICES)
-    fitness_bio = models.CharField(max_length = 1, choices=BIO_CHOICES)
-    
-class body_data_model(models.Model):
+    training_place = models.CharField(max_length=1, choices=PLACE_CHOICES)
+    food_intolerance = models.CharField(max_length=1000)
+    equipment = models.CharField(max_length=1, choices=EQUIP_CHOICES)
+    chat_availability = models.CharField(max_length=1, choices=CHAT_CHOICES)
+    fitness_bio = models.CharField(max_length=1, choices=BIO_CHOICES)
+
+    class Meta:
+        verbose_name_plural = "Fitness data"
+
+    def __str__(self):
+        return self.training_place
+
+
+class BodyData(models.Model):
     GOALS_CHOICES = (
         ('0', 'build muscle'),
         ('1', 'lose weight'),
@@ -54,8 +71,13 @@ class body_data_model(models.Model):
         ('2', 'Agricultural worker (non mechanized) or person swimming two hours daily'),
         ('3', 'Competitive cyclist')
     )
-    height = models.FloatField
-    weight = models.FloatField
-    goals = models.CharField(max_length = 1, choices=GOALS_CHOICES)
-    activity_level = models.CharField(max_length = 1, choices=ACTIVITY_CHOICES)
-    
+    height = models.FloatField()
+    weight = models.FloatField()
+    goals = models.CharField(max_length=1, choices=GOALS_CHOICES)
+    activity_level = models.CharField(max_length=1, choices=ACTIVITY_CHOICES)
+
+    class Meta:
+        verbose_name_plural = "Body data"
+
+    def __str__(self):
+        return self.goals
